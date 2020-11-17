@@ -14,6 +14,8 @@ const bodyParser=require('body-parser')
 app.use(bodyParser.urlencoded({extended:true,limit: '50mb'}))
 
 app.post('/submit', (req,res)=>{  
+    success=true; 
+    try {
     var Connection = require('tedious').Connection;  
     var config = {  
         server: 'kingstondb.database.windows.net',  //update me
@@ -31,27 +33,30 @@ app.post('/submit', (req,res)=>{
         }
     };  
     var connection = new Connection(config); 
-    var ok=true; 
+    
     connection.on('connect', function(err) {  
         if(!err){
           console.log("Connected");  
-          executeStatement1();  
+          executeStatement1(); 
+          // res.send({success: success}) 
         }else{
-          res.render("error")
-          ok=false;
+          success=false;
+          res.send({success: success}) 
         }
         // If no error, then good to proceed.  
     });  
-  
     var Request = require('tedious').Request  
     var TYPES = require('tedious').TYPES;  
   
     function executeStatement1(){
-      request = new Request("INSERT INTO [dbo].[register]([name],[phone],[addr],[email],[purchasedPro],[receiptNum],[bill]) VALUES(@user_name,@user_phone,@user_addr,@email_check,@user_where,@user_product,@thum_base64)", function(err) {  
+       request = new Request("INSERT ITO [dbo].[register]([name],[phone],[addr],[email],[purchasedPro],[receiptNum],[bill]) VALUES(@user_name,@user_phone,@user_addr,@email_check,@user_where,@user_product,@thum_base64)", function(err) {
        if (err) {  
            console.log(err);  
-           ok=false;
-           res.render("error") }  
+           success=false;
+           res.send({success: success}) 
+           } else{
+            res.send({success: success}) 
+           }
        });  
        request.addParameter('user_name', TYPES.NVarChar,req.body.user_name);  
        request.addParameter('user_phone', TYPES.NVarChar , req.body.user_phone);  
@@ -70,7 +75,9 @@ app.post('/submit', (req,res)=>{
            });  
        });       
        connection.execSql(request);  
+    }   
+    } catch (error) {
+      success=false;
     }
-    res.contentType('json');
-    res.send({ some: JSON.stringify({response:ok}) });
+    
 });

@@ -38,7 +38,7 @@ $("#zBtn").click(function(){
     headers: {
     }, 
     success: function (data) {
-        if(data.response){
+        if(data["success"]){
           alert("Thanks, we’ve received your registration. The winners of the raffle draw will be announced on Kingston official Facebook fan page and notified by December 3 2020.")
         }else{
           alert('We are sorry but our servers are having an issue right now');
@@ -46,7 +46,7 @@ $("#zBtn").click(function(){
         window.location.reload()
       },  
     error: function () {
-        console.log('We are sorry but our servers are having an issue right now');
+        alert('We are sorry but our servers are having an issue right now');
     }
 })
   }
