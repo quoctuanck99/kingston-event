@@ -30,21 +30,28 @@ app.post('/submit', (req,res)=>{
             database: 'kingston_event'  //update me
         }
     };  
-    var connection = new Connection(config);  
+    var connection = new Connection(config); 
+    var ok=1; 
     connection.on('connect', function(err) {  
+        if(!err){
+          console.log("Connected");  
+          executeStatement1();  
+        }else{
+          res.render("error")
+          ok=0;
+        }
         // If no error, then good to proceed.  
-        console.log("Connected");  
-        executeStatement1();  
     });  
   
     var Request = require('tedious').Request  
     var TYPES = require('tedious').TYPES;  
   
     function executeStatement1(){
-      request = new Request("INSERT INTO [dbo].[register]([name],[phone],[addr],[email],[purchasedPro],[receiptNum],[bill]) VALUES(@user_name,@user_phone,@user_addr,@email_check,@user_where,@user_product,@thum_base64)", function(err) {  
-        if (err) {  
-           console.log(err);
-           res.send("error") }  
+      request = new Request("INSERT INO [dbo].[register]([name],[phone],[addr],[email],[purchasedPro],[receiptNum],[bill]) VALUES(@user_name,@user_phone,@user_addr,@email_check,@user_where,@user_product,@thum_base64)", function(err) {  
+       if (err) {  
+           console.log(err);  
+           ok=0;
+           res.render("error") }  
        });  
        request.addParameter('user_name', TYPES.NVarChar,req.body.user_name);  
        request.addParameter('user_phone', TYPES.NVarChar , req.body.user_phone);  
@@ -65,5 +72,5 @@ app.post('/submit', (req,res)=>{
        connection.execSql(request);  
     }
     res.contentType('json');
-    res.send({ some: JSON.stringify({response:'json'}) });
+    res.send({ some: JSON.stringify({response:ok}) });
 });
