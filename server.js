@@ -31,14 +31,14 @@ app.post('/submit', (req,res)=>{
         }
     };  
     var connection = new Connection(config); 
-    var ok=1; 
+    var ok=true; 
     connection.on('connect', function(err) {  
         if(!err){
           console.log("Connected");  
           executeStatement1();  
         }else{
           res.render("error")
-          ok=0;
+          ok=false;
         }
         // If no error, then good to proceed.  
     });  
@@ -50,7 +50,7 @@ app.post('/submit', (req,res)=>{
       request = new Request("INSERT INTO [dbo].[register]([name],[phone],[addr],[email],[purchasedPro],[receiptNum],[bill]) VALUES(@user_name,@user_phone,@user_addr,@email_check,@user_where,@user_product,@thum_base64)", function(err) {  
        if (err) {  
            console.log(err);  
-           ok=0;
+           ok=false;
            res.render("error") }  
        });  
        request.addParameter('user_name', TYPES.NVarChar,req.body.user_name);  
