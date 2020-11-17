@@ -47,7 +47,7 @@ app.post('/submit', (req,res)=>{
     var TYPES = require('tedious').TYPES;  
   
     function executeStatement1(){
-      request = new Request("INSERT INO [dbo].[register]([name],[phone],[addr],[email],[purchasedPro],[receiptNum],[bill]) VALUES(@user_name,@user_phone,@user_addr,@email_check,@user_where,@user_product,@thum_base64)", function(err) {  
+      request = new Request("INSERT INTO [dbo].[register]([name],[phone],[addr],[email],[purchasedPro],[receiptNum],[bill]) VALUES(@user_name,@user_phone,@user_addr,@email_check,@user_where,@user_product,@thum_base64)", function(err) {  
        if (err) {  
            console.log(err);  
            ok=0;
