@@ -1,0 +1,103 @@
+/*設定螢幕*/
+@media all and (max-width: 1300px) {
+	.main {width: 100%; }
+	/*.impact .Td_1 img, .impact .Td_2 img{ width: 100%;}*/
+	.Prize .Table img{ width:100%; }
+}
+@media all and (max-width: 1100px) {
+	.impact .box{
+ 	/*background-size: contain; 
+	-webkit-background-size: contain; 
+	-moz-background-size: contain;
+	-o-background-size: contain;
+   padding:90px 10.85% 40px 16.15%; */}
+	
+}
+@media all and (max-width: 1024px) {
+    .content { width: 90%; }
+	.product ,.formBox { width: 95.2789%;}
+	
+	.impact .box{ width: 100%; height: 0; padding-bottom:60.79% /*622.5px/1024*/;
+	background-size: contain; 
+	-webkit-background-size: contain; 
+	-moz-background-size: contain; 
+	-o-background-size: contain;
+	}
+	.ruleBox{
+   background-repeat: no-repeat;
+ 	background-size: contain; 
+	-webkit-background-size: contain; 
+	-moz-background-size: contain;
+	-o-background-size: contain;
+}
+@media all and (max-width: 960px) {
+	.impact .box{/*padding:80px 8.85% 50px 12.15%; */}
+	/*.impact .Td_2 .t{ font-size:1.375em;}
+	.impact .txt{font-size:1.5em;}*/
+	.Prize .Table { width: 100%;}
+.Prize .Td_1 { width: 48.7%; }
+.Prize .Td_2 { width: 48.7%;  }
+	
+	.product .Td_1 { width: 100%; display: block; text-align: center; padding:0 1.2em 0 1.2em;}
+	.product .Td_2 { width: 100%; display: block;  padding:0 1.2em 2em 1.2em;}
+	.product .Td_1 .ph{ position: static; margin-top: -32px; text-align: center;}
+    .product .Td_1 .ph img {width: 40%;}
+}
+
+
+@media all and (max-width:860px) {
+	.impact{ background-position: center center;}
+	.impact img{  max-width: 90%;}
+	.form .Td_1{width: 100%; text-align: left; display: block;}
+    .form .Td_2{width: 100%; padding: 0.5em 0 0.5em 0; display: block;;}
+}
+
+@media all and (max-width: 767px) { 
+	.Prize{width: 73%;}
+	.Prize .Td_1 { display: block; width: 100%; text-align: center; padding-right:0;}
+    .Prize .Td_2 { display: block; width:  100%; text-align: center; padding-left:0;}
+	.product .Td_1 .ph img {width: 50%;}
+	
+	.product ,.formBox {width: 65.5%;}
+	.product .Td_1 .ph img {width: 80%;}
+	.product .txt span { display: block;}
+}
+
+@media all and (max-width: 640px) {
+	.Prize{width: 81%;}
+	.product ,.formBox {width: 72.5%;}
+	.product .Td_1 .ph img {width: 80%;}
+	
+	.impact .box{ padding-bottom:71.66% /*650px/907*/; background-image: url(images/image.png); position: relative;
+
+   }
+}
+
+@media all and (max-width: 580px) {
+	.Prize{width: 86%;}
+	.product ,.formBox {width: 77.5%;}
+	.product .Td_1 .ph img {width: 85%;}
+}
+
+@media all and (max-width: 550px) {
+	.end .t2 { height: auto; font-size: 1.3em; line-height: 1.1; padding: 1em;}
+.end .t2 img { display: none;}
+}
+
+@media all and (max-width: 540px) {
+	.Prize{width: 99%;}
+	.product ,.formBox {width: 89.5%;}
+	.product .Td_1 .ph img {width: 87%;}
+	.form .Td_1{ white-space:normal;}
+	.product .t2 span {display: block}
+}
+
+@media all and (max-width: 480px) {
+	.impact .Td_1 img, .impact .Td_2 img{ width: 70%;}
+}
+
+@media all and (max-width: 340px) {
+	.end .t2 { font-size: 1.1em;}
+	.end img.t1  {width:80%;}
+	.fancybox-content{padding: 30px !important;}
+}

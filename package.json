@@ -1,0 +1,21 @@
+{
+  "name": "simple-node-website",
+  "version": "0.1.0",
+  "description": "A simple website built with Node, Express and Pug",
+  "main": "server.js",
+  "scripts": {
+    "start": "npx pm2 start server.js --watch"
+  },
+  "author": "Ayo Isaiah",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.17.1",
+    "jquery-html5-validity": "^1.1.2",
+    "mssql": "^6.2.3",
+    "pug": "^2.0.3"
+  },
+  "devDependencies": {
+    "pm2": "^2.10.3"
+  }
+}

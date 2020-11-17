@@ -1,0 +1,439 @@
+doctype html
+head
+  meta(http-equiv='Content-Type' content='text/html; charset=UTF-8')
+  style#mailtoui-styles(type='text/css').
+    .mailtoui-modal {
+    background-color: #000;
+    background-color: rgba(0, 0, 0, .4);
+    bottom: 0;
+    color: #303131;
+    display: none;
+    height: 100%;
+    left: 0;
+    margin: 0;
+    padding: 0;
+    position: fixed;
+    right: 0;
+    top: 0;
+    width: 100%;
+    z-index: 1000
+    }
+    .mailtoui-modal-content {
+    -webkit-animation: mailtoui-appear .4s;
+    animation: mailtoui-appear .4s;
+    background-color: #f1f5f8;
+    border-radius: 8px;
+    bottom: auto;
+    -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, .2), 0 6px 20px 0 rgba(0, 0, 0, .19);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, .2), 0 6px 20px 0 rgba(0, 0, 0, .19);
+    left: 50%;
+    max-height: calc(100% - 100px);
+    overflow: auto;
+    padding: 0;
+    position: fixed;
+    right: -45%;
+    top: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%)
+    }
+    .mailtoui-modal-content:focus,
+    .mailtoui-modal-content:hover {
+    overflow-y: auto
+    }
+    @media only screen and (min-width:768px) {
+    .mailtoui-modal-content {
+    right: auto
+    }
+    }
+    .mailtoui-modal-head {
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    background-color: #fff;
+    clear: both;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    min-width: 0;
+    padding: 10px 20px
+    }
+    .mailtoui-modal-title {
+    color: #303131;
+    -webkit-box-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+    font-family: sans-serif;
+    font-size: 120%;
+    font-weight: 700;
+    margin: 0;
+    overflow: hidden;
+    padding: 0;
+    text-overflow: ellipsis;
+    white-space: nowrap
+    }
+    .mailtoui-modal-close {
+    color: #aaa;
+    -webkit-box-flex: initial;
+    -ms-flex: initial;
+    flex: initial;
+    font-size: 38px;
+    margin-left: 20px;
+    position: relative;
+    text-align: right;
+    text-decoration: none;
+    top: -4px
+    }
+    .mailtoui-modal-close:focus,
+    .mailtoui-modal-close:hover {
+    color: #000;
+    cursor: pointer;
+    font-weight: 700;
+    outline: 0
+    }
+    .mailtoui-modal-body {
+    height: 100%;
+    padding: 20px
+    }
+    .mailtoui-button {
+    color: #333;
+    text-decoration: none
+    }
+    .mailtoui-button:focus {
+    outline: 0
+    }
+    .mailtoui-button:focus .mailtoui-button-content {
+    background-color: #555;
+    color: #fff
+    }
+    .mailtoui-button-content {
+    background-color: #fff;
+    border: none;
+    border-radius: 8px;
+    -webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, .18);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, .18);
+    margin-bottom: 20px;
+    overflow: hidden;
+    padding: 15px 20px;
+    text-overflow: ellipsis;
+    white-space: nowrap
+    }
+    .mailtoui-button-content:hover {
+    background-color: #555;
+    color: #fff
+    }
+    .mailtoui-button:last-child .mailtoui-button-content {
+    margin-bottom: 0
+    }
+    .mailtoui-button-icon {
+    display: inline-block;
+    font-weight: 700;
+    position: relative;
+    top: 4px
+    }
+    .mailtoui-button-icon svg {
+    height: 24px;
+    width: 24px
+    }
+    .mailtoui-button-text {
+    display: inline-block;
+    margin-left: 5px;
+    position: relative;
+    top: -2px
+    }
+    .mailtoui-copy {
+    border-radius: 8px;
+    -webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, .18);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, .18);
+    height: 59px;
+    margin-top: 20px;
+    position: relative
+    }
+    .mailtoui-button-copy {
+    background-color: #fff;
+    border: none;
+    border-bottom-left-radius: 8px;
+    border-top-left-radius: 8px;
+    bottom: 21px;
+    color: #333;
+    font-size: 100%;
+    height: 100%;
+    left: 0;
+    overflow: hidden;
+    padding: 15px 20px;
+    position: absolute;
+    text-overflow: ellipsis;
+    top: 0;
+    white-space: nowrap;
+    width: 120px
+    }
+    .mailtoui-button-copy:focus,
+    .mailtoui-button-copy:hover {
+    background-color: #555;
+    color: #fff;
+    cursor: pointer;
+    outline: 0
+    }
+    .mailtoui-button-copy-clicked,
+    .mailtoui-button-copy-clicked:focus,
+    .mailtoui-button-copy-clicked:hover {
+    background-color: #1f9d55;
+    color: #fff
+    }
+    .mailtoui-button-copy-clicked .mailtoui-button-icon,
+    .mailtoui-button-copy-clicked:focus .mailtoui-button-icon,
+    .mailtoui-button-copy-clicked:hover .mailtoui-button-icon {
+    display: none;
+    visibility: hidden
+    }
+    .mailtoui-button-copy-clicked .mailtoui-button-text,
+    .mailtoui-button-copy-clicked:focus .mailtoui-button-text,
+    .mailtoui-button-copy-clicked:hover .mailtoui-button-text {
+    color: #fff;
+    top: 2px
+    }
+    .mailtoui-email-address {
+    background-color: #d8dcdf;
+    border: none;
+    border-radius: 8px;
+    -webkit-box-shadow: unset;
+    box-shadow: unset;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    color: #48494a;
+    font-size: 100%;
+    height: 100%;
+    overflow: hidden;
+    padding: 20px 20px 20px 140px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 100%
+    }
+    .mailtoui-brand {
+    color: #888;
+    font-size: 80%;
+    margin-top: 20px;
+    text-align: center
+    }
+    .mailtoui-brand a {
+    color: #888
+    }
+    .mailtoui-brand a:focus,
+    .mailtoui-brand a:hover {
+    font-weight: 700;
+    outline: 0
+    }
+    .mailtoui-no-scroll {
+    overflow: hidden;
+    position: fixed;
+    width: 100%
+    }
+    .mailtoui-is-hidden {
+    display: none;
+    visibility: hidden
+    }
+    @-webkit-keyframes mailtoui-appear {
+    0% {
+    opacity: 0;
+    -webkit-transform: translate(-50%, -50%) scale(0, 0);
+    transform: translate(-50%, -50%) scale(0, 0)
+    }
+    100% {
+    opacity: 1;
+    -webkit-transform: translate(-50%, -50%) scale(1, 1);
+    transform: translate(-50%, -50%) scale(1, 1)
+    }
+    }
+    @keyframes mailtoui-appear {
+    0% {
+    opacity: 0;
+    -webkit-transform: translate(-50%, -50%) scale(0, 0);
+    transform: translate(-50%, -50%) scale(0, 0)
+    }
+    100% {
+    opacity: 1;
+    -webkit-transform: translate(-50%, -50%) scale(1, 1);
+    transform: translate(-50%, -50%) scale(1, 1)
+    }
+    }
+  title Kingston Technology | 17-Year No.1 Celebration
+  meta(name='viewport' content='width=device-width, initial-scale=1.0')
+  meta(name='title' content='Kingston Technology | 17-Year No.1 Celebration')
+  link(href='https://kingston-event.com/philippines/17yearsno1/images/favicon.ico' rel='shortcut icon' type='image/x-icon')
+  link(rel='stylesheet' href='/css/main.css')
+  link(rel='stylesheet' href='/css/responsive.css')
+  link(rel='stylesheet' href='/css/jquery.fancybox.min.css')
+  link(rel='stylesheet' href='/css/vendor.css')
+
+  script.
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'UA-164523001-5');
+.main
+  .goTop
+    a(href='#top')
+      img(src='/images/top.png' alt='')
+  .impact
+    .box
+  .content
+    .Prize
+      h4 GET FREE GIFTS!
+      .Table
+        .Td_1
+          img(src='/images/th_win_b1.png' alt='Buy One Get One!')
+        .Td_2
+          img(src='/images/th_win_b2.png' alt='Raffle Draw')
+    .formBox
+      .cMain
+        form#test(method='POST', action="/submit")
+          .cTitle
+            | Register now!
+          .form
+            .close
+              .Table
+                .Td
+                  | The form is only open during promotion period, from Oct 20 to Nov
+                  | 30. Thank you.
+            ul
+              li
+                .Td_1 Full Name:
+                .Td_2.fill
+                  input#name_check(type='text' name='user_name' data-validate='^([A-Za-z]+ [A-Za-z]+){1,}$' required='')
+              li
+                .Td_1 Mobile Phone:
+                .Td_2.fill
+                  input#user_phone(type='text' name='user_phone' required='')
+              li
+                .Td_1 Email:
+                .Td_2.fill
+                  input#email_check(type='text' name='user_email' data-validate='^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$' required='')
+              li
+                .Td_1 Address:
+                .Td_2.fill
+                  input#user_addr(type='text' name='user_addr' required='')
+              li
+                .Td_1 Purchased Product:
+                .Td_2.fill
+                  input#user_product(type='text' name='user_product' required='')
+              li
+                .Td_1 Receipt Number:
+                .Td_2.fill
+                  input#user_where(type='text' name='user_where' required='')
+              li
+                .Td_1(style='vertical-align: top; padding-top: 1em;')
+                  | Upload Your
+                  | Purchase Receipt:
+                .Td_2.fill
+                  .fileBtn
+                    // <label for="file-upload" class="custom-file-upload">อัพโหลดรูปภาพ</label>
+                    input#bill-upload(type='file' accept='image/jpeg, image/png' data-preview-img='file' data-upload-input='thum_base64' data-max-height='270')
+                    span The image size should be no more than 2MB / jpg.
+                  // <div class="ph" data-field="file"></div>
+                  input#billBase64(type='hidden' value='')
+              li
+                .Td_1
+                .Td_2
+                  .read
+                    .Td_3
+                      label.checkbox-label
+                        input#checkterm(type='checkbox' name='agree1' value='Y' required='')
+                        span.checkbox-custom.rectangular
+                    .Td_4
+                      | I have read and agree to the 
+                      a(href='https://kingston-event.com/philippines/17yearsno1/#policy')
+                        | Terms
+                        | and Conditions.
+         
+              li
+                .Td_1
+                .Td_2
+                //-   input#send(type='submit' style='display: none')
+          #myModal.end(style='display: none;')
+            img.t1(src='/css/end.gif')
+            .t2 Thanks, we&rsquo;ve received your registration.
+            p
+              | The winners of the raffle draw will be announced on Kingston official Facebook fan page
+              | and notified by December 3 2020.
+          .btnBox
+            a#zBtn.btn.btn-primary Submit
+
+  .ruleBox
+    .inner
+      h2 Raffle Prize
+      ul.s1
+        li
+          .Td_1 -
+          .Td_2
+            | Grand Prize: Yamaha Mio Sporty (Matte Black) worth Php 67,900. For 1 winner.
+        li
+          .Td_1 -
+          .Td_2
+            | 1
+            sup st
+            |  Prize: Lenovo IdeaPad Slim 3 worth Php 29,995. For 2 winners.
+        li
+          .Td_1 -
+          .Td_2
+            | 2
+            sup nd
+            |  Prize: HyperX Cloud Alpha - Gaming Headset (Red) worth Php
+            | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;6,499. For 5 winners.
+        li
+          .Td_1 -
+          .Td_2
+            | 3
+            sup rd
+            |  Prize: HyperX Stinger Core 7.1 Wireless worth Php 4,390. For 5
+            | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;winners.
+      h2#policy Terms &amp; Conditions 
+      ul.s2
+        li
+          | This promotion is open only to residents and permanent residents of Philippines.
+        li
+          | This promotion is valid from Oct 20 2020 to Nov 30 2020 only applied to below channels: JW
+          | Summit(Playbookstore), The Net 2 Service Provider(Wholesalemaster/Gtech), Villman, PC Hub,
+          | Nutech Marketing, EasyPC, Complink, JDM Techno, Electrocomputer Data Systems, Joyo Marketing,
+          | Octagon, Thinking Tools, Davao Futurebright Enterprises, PCworx, Ultrium, Silicon Valley,
+          | Dynaquest, MF Computer Solutions, Greenware Customized Systems &amp; PC, Infinitecom, RAD 101
+          | Tech, Strategic Technologies Gaming Computers, CBX Corporation, PC Express, Qualitek Computers.
+        li
+          | By entering this form, entrant agrees to the use of the information submitted on the lucky draw
+          | entry form, without compensation, for Kingston&rsquo;s promotional and marketing purposes.
+        li
+          | Multiple entries are allowed; however one product transaction will be treated as one entry only.
+        li
+          | The deadline of submission of entry and claiming of voucher is Nov 30 11:59PM 2020.
+        li Please ensure that the receipt shows the items you purchased clearly.
+        li
+          | E-voucher will be deployed to your email address or mobile phone number in 2 weeks after the
+          | submission if qualified.
+        li
+          | Drawing of winners will be held on December 03, 2020 &ndash; 2:00 PM at IBP Tower Jade Drive Ortigas
+          | Center, Pasig City with the presence of a DTI Representative.
+        li
+          | The winners of the raffle draw will be announced on Kingston official Facebook fan page and
+          | notify via registered mail, via phone call or prize notification. Entrants must keep their
+          | original receipt in order to claim a winning prize.
+        li
+          | Redemption of prizes are valid until 60 days from receipt or registered mail/written
+          | notification, raffle draw winners that do not respond within required time will be forfeited.
+          | The prizes are non-convertible to cash and non-transferable.
+        li Per DTI Fair Trade Permit No.1 FTEB-107096 Series of 2020
+      h2 Contact us
+      .share
+        a.s1(href='https://www.facebook.com/kingstonapac/' target='_blank')
+          img(src='/images/icon_fb.png' alt='FB : Kingston Technology')
+        a.mailtoui.s2(href='mailto:marketing@kingston.com') Email: marketing@kingston.com 
+script(src='/css/mailtoui-min.js.download')
+div
+  .grecaptcha-badge(data-style='bottomright' style='width: 256px; height: 60px; display: block; transition: right 0.3s ease 0s; position: fixed; bottom: 14px; right: -186px; box-shadow: gray 0px 0px 5px; border-radius: 2px; overflow: hidden;')
+    .grecaptcha-logo
+      iframe(src='/css/anchor.html' width='256' height='60' role='presentation' name='a-892gb14zjepv' frameborder='0' scrolling='no' sandbox='allow-forms allow-popups allow-same-origin allow-scripts allow-top-navigation allow-modals allow-popups-to-escape-sandbox')
+    .grecaptcha-error
+    textarea#g-recaptcha-response-100000.g-recaptcha-response(name='g-recaptcha-response' style='width: 250px; height: 40px; border: 1px solid rgb(193, 193, 193); margin: 10px 25px; padding: 0px; resize: none; display: none;')
+  iframe(style='display: none;' src='/css/saved_resource(1).html')
+  
+  script(src='/js/jquery.min.js')
+  script(src='/js/script.js')
+//- script.
+//-   document.getElementById("zBtn").onclick=function(){document.getElementById("send").click()}

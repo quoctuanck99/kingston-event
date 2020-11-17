@@ -1,0 +1,8 @@
+{
+    "appService.zipIgnorePattern": [
+        "node_modules{,/**}",
+        ".vscode{,/**}"
+    ],
+    "appService.deploySubpath": ".",
+    "appService.defaultWebAppToDeploy": "/subscriptions/7d2eade3-cbd7-4541-a557-b2389304ab02/resourceGroups/kingston/providers/Microsoft.Web/sites/kingstonevent"
+}
